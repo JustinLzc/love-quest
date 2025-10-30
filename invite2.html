@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>💌 Sunday Date Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --pink-bg: #FADADD;
+    --paper: #FFF9F5;
+    --accent-pill: #CDE0C0;
+    --accent-text: #324434;
+    --text-main: #4a3b3b;
+    --text-soft: #6a5656;
+    --border-soft: rgba(0,0,0,0.06);
+    --radius-xl: 24px;
+    --radius-md: 12px;
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: radial-gradient(circle at 20% 20%, var(--pink-bg) 0%, #FFF9F5 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    font-family: 'Quicksand', system-ui, sans-serif;
+    color: var(--text-main);
+    transition: background 0.5s ease;
+  }
+
+  .mail-shell {
+    width: 100%;
+    max-width: 460px;
+    background: var(--paper);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-soft);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+
+  /* fake email header bar */
+  .mail-topbar {
+    background: #ffffffcc;
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border-soft);
+    padding: .75rem 1rem;
+    font-size: .8rem;
+    line-height: 1.3;
+  }
+
+  .label {
+    font-weight: 600;
+    color: var(--text-main);
+  }
+  .value {
+    color: var(--text-soft);
+  }
+
+  .mail-body {
+    padding: 1.5rem 1.25rem 1.25rem;
+  }
+
+  .invite-heading {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.6rem;
+    color: var(--text-main);
+    margin-top: 1rem;
+  }
+
+  .body-text {
+    margin-top: .9rem;
+    font-size: .9rem;
+    line-height: 1.5;
+    color: var(--text-main);
+  }
+
+  .cta-wrap {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+  }
+
+  .accept-btn, .decline-btn {
+    flex: 1;
+    border-radius: var(--radius-md);
+    border: 0;
+    font-size: .9rem;
+    font-weight: 600;
+    line-height: 1.2;
+    padding: .9rem 1rem;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.07);
+  }
+
+  .accept-btn {
+    background: var(--accent-pill);
+    color: var(--accent-text);
+  }
+
+  .decline-btn {
+    background: #ffffff;
+    color: var(--text-soft);
+    border: 1px solid var(--border-soft);
+  }
+
+  .footer-love {
+    margin-top: 1.25rem;
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    color: var(--text-main);
+  }
+
+  /* ✨ Hidden Agenda Reveal ✨ */
+  .agenda {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+    background: #ffffffc8;
+    border-radius: 20px;
+    margin: 1.5rem 1rem 1rem;
+    padding: 1rem;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.07);
+  }
+
+  .agenda.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .agenda-title {
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    font-size: 1.3rem;
+    color: #4a3b3b;
+    margin-bottom: .75rem;
+  }
+
+  .agenda-item {
+    font-size: .9rem;
+    color: var(--text-soft);
+    margin: .3rem 0;
+    line-height: 1.5;
+  }
+
+  .agenda-item span {
+    font-size: 1rem;
+    margin-right: .4rem;
+  }
+
+  .view-full-btn {
+    display: block;
+    margin: 1rem auto 0;
+    text-align: center;
+    text-decoration: none;
+    background: var(--accent-pill);
+    color: var(--accent-text);
+    border-radius: 999px;
+    font-weight: 600;
+    padding: .6rem 1.4rem;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.07);
+    width: fit-content;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="mail-shell" id="inviteCard">
+
+  <div class="mail-topbar">
+    <div><span class="label">From:</span> Justin 💖 &lt;boyfriend@love.quest&gt;</div>
+    <div><span class="label">To:</span> Jia Hui &lt;girlfriend@heartmail.com&gt;</div>
+    <div><span class="label">Subject:</span> Invitation: Our Sunday Love Quest 💕</div>
+  </div>
+
+  <div class="mail-body">
+    <div class="invite-heading">Hi Jia Hui 🌸</div>
+    <div class="body-text">
+      You are invited to a cozy Sunday filled with joy, clay, fluff, and pasta.  
+      Do you accept this <strong>Love Quest</strong> mission? 💌
+    </div>
+
+    <div class="cta-wrap">
+      <button class="accept-btn" id="acceptBtn">✅ Accept Invite</button>
+      <button class="decline-btn" id="declineBtn">❌ Decline</button>
+    </div>
+
+    <div class="footer-love">– Justin 🤍</div>
+  </div>
+
+  <!-- Hidden Agenda -->
+  <div class="agenda" id="agendaSection">
+    <div class="agenda-title">Sunday Love Quest 💕</div>
+    <div class="agenda-item">☀️ 11:00 AM — Wake up slow & cozy</div>
+    <div class="agenda-item">🍳 12:30 PM — Brunch @ Sun & Moon</div>
+    <div class="agenda-item">🏺 3:00 PM — Pottery @ Zen Ceramic</div>
+    <div class="agenda-item">🐾 5:30 PM — Floofy break @ Sho Floofeee</div>
+    <div class="agenda-item">🍝 7:30 PM — Dinner @ Bacio Italian</div>
+
+    <a href="index.html" class="view-full-btn">✨ View Full Timeline</a>
+  </div>
+
+</div>
+
+<script>
+  const acceptBtn = document.getElementById("acceptBtn");
+  const declineBtn = document.getElementById("declineBtn");
+  const agenda = document.getElementById("agendaSection");
+  const inviteCard = document.getElementById("inviteCard");
+
+  acceptBtn.addEventListener("click", () => {
+    // Add a soft reveal animation
+    inviteCard.style.transform = "scale(0.98)";
+    setTimeout(() => {
+      agenda.classList.add("show");
+      inviteCard.style.transform = "scale(1)";
+    }, 200);
+
+    acceptBtn.textContent = "💖 Accepted!";
+    acceptBtn.disabled = true;
+    declineBtn.style.display = "none";
+  });
+
+  declineBtn.addEventListener("click", () => {
+    alert("You can’t decline love, silly 😜");
+  });
+</script>
+
+</body>
+</html>

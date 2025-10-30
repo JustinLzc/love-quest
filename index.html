@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Sunday Love Quest 💕</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pink: #FADADD;
+      --cream: #FFF9F5;
+      --honey: #F5E4C3;
+      --sage: #CDE0C0;
+      --sky:  #D3EAF2;
+      --text-dark: #4a3b3b;
+      --border-soft: rgba(0,0,0,0.05);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 20% 20%, var(--pink) 0%, var(--cream) 60%);
+      font-family: 'Quicksand', system-ui, sans-serif;
+      color: var(--text-dark);
+      padding-bottom: 3rem;
+    }
+
+    .page-shell {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    /* HEADER */
+    .header-card {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.07);
+      padding: 1.5rem 1.25rem 1.25rem;
+      border: 1px solid var(--border-soft);
+      text-align: center;
+      position: relative;
+    }
+
+    .title {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.6rem;
+      color: #5a4141;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+
+    .title-heart {
+      font-size: .9rem;
+      font-weight: 500;
+      font-family: 'Quicksand', sans-serif;
+      background: var(--sage);
+      color: #324434;
+      padding: .4rem .75rem;
+      border-radius: 999px;
+      display: inline-block;
+      margin:  auto;
+    }
+
+    .subtitle {
+      font-size: .9rem;
+      line-height: 1.4;
+      color: #6a5656;
+      margin-top: .75rem;
+    }
+
+    /* TIMELINE */
+    .timeline-wrap {
+      position: relative;
+      margin-top: 2rem;
+    }
+
+    /* vertical line */
+    .timeline-line {
+    position: absolute;
+    left: 33.5px;  /* center it behind 56px-wide bubbles */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.08) 0 6px,
+        rgba(0,0,0,0) 6px 12px
+    );
+    }
+
+
+    .event-block {
+      position: relative;
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* time dot */
+    .time-dot {
+      flex-shrink: 0;
+      position: relative;
+      width: 70px;
+      text-align: center;
+      font-size: .7rem;
+      line-height: 1.2;
+      font-weight: 600;
+      color: #4a3b3b;
+    }
+
+    .time-bubble {
+        width: 56px;          /* increased width */
+        height: 56px;         /* taller bubble for balance */
+        font-size: 0.75rem;   /* slightly smaller text */
+        line-height: 1.1;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--sky), var(--pink));
+        border: 2px solid #fff;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        font-weight: 600;
+        color: #2b3a40;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto .4rem;
+    }
+
+
+    /* card */
+    .event-card {
+      flex: 1;
+      background: var(--cream);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+      padding: 1rem 1rem 1.25rem;
+    }
+
+    .event-header-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      row-gap: .4rem;
+    }
+
+    .event-title {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #4a3b3b;
+      line-height: 1.3;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .tag-pill {
+      background: var(--honey);
+      border-radius: 999px;
+      font-size: .7rem;
+      line-height: 1.2;
+      padding: .35rem .6rem;
+      font-weight: 500;
+      color: #5a4a31;
+    }
+
+    .event-desc {
+      font-size: .8rem;
+      line-height: 1.4;
+      color: #6a5656;
+      margin-top: .6rem;
+    }
+
+    /* image gallery */
+    .img-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .4rem;
+      margin-top: .8rem;
+    }
+
+    .img-row img {
+      width: 100%;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+      background: #ddd;
+    }
+
+    /* DRIVE BLOCK */
+    .drive-block {
+      position: relative;
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .drive-card {
+      flex: 1;
+      background: var(--sage);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+      padding: .9rem 1rem;
+      color: #2f402f;
+      font-size: .8rem;
+      line-height: 1.4;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .drive-card .car-row {
+      font-weight: 600;
+      font-size: .8rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      color: #2f402f;
+    }
+
+    .road-bar {
+      margin-top: .6rem;
+      background: repeating-linear-gradient(
+        to right,
+        rgba(0,0,0,0) 0 8px,
+        rgba(255,255,255,.8) 8px 16px
+      );
+      height: 4px;
+      border-radius: 999px;
+      position: relative;
+    }
+
+    .car-emoji {
+      position: absolute;
+      top: -14px;
+      right: 0;
+      font-size: 1rem;
+    }
+
+    /* FOOTER */
+    .footer-card {
+      text-align: center;
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      padding: 1.5rem 1.25rem 2rem;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.07);
+      font-size: .9rem;
+      line-height: 1.4;
+      color: #4a3b3b;
+    }
+
+    .footer-big {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.2rem;
+      line-height: 1.3;
+      margin-bottom: .5rem;
+      color: #5a4141;
+    }
+
+    .footer-note {
+      font-size: .8rem;
+      color: #6a5656;
+    }
+        /* LIGHTBOX STYLES */
+    .lightbox {
+    display: none; /* hidden by default */
+    position: fixed;
+    z-index: 9999;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(4px);
+    }
+
+    .lightbox-img {
+    margin: auto;
+    display: block;
+    max-width: 85%;
+    max-height: 80vh;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    animation: fadeIn 0.3s ease;
+    }
+    @keyframes zoomIn {
+  from {transform: scale(0.9); opacity: 0;}
+  to {transform: scale(1); opacity: 1;}
+}
+
+    .caption {
+    text-align: center;
+    color: #f2f2f2;
+    font-size: 0.9rem;
+    padding-top: 10px;
+    }
+
+    .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    }
+
+    .close-btn:hover {
+    color: #ffb3b3;
+    }
+
+    /* Animation for smooth appearance */
+    @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+    }
+
+    /* Slight hover effect on thumbnails */
+    .img-row img {
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .img-row img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <main class="page-shell">
+    <!-- HEADER -->
+    <section class="header-card">
+      <div class="title">
+        <span>Our Sunday Love Quest 💕</span>
+        <span class="title-heart">A cozy day for us</span>
+      </div>
+      <div class="subtitle">
+        Sunday Timeline · Wake Slow, Brunch Bright, Shape Love, Taste Fluff, Twirl Pasta ✨
+      </div>
+    </section>
+
+    <section class="timeline-wrap">
+      <div class="timeline-line"></div>
+
+      <!-- WAKE UP -->
+      <article class="event-block">
+        <div class="time-dot">
+          <div class="time-bubble">11:00</div>
+          
+        </div>
+        <div class="event-card">
+          <div class="event-header-row">
+            <div class="event-title">
+              Wake Up ☀️
+              <span class="tag-pill">soft start</span>
+            </div>
+          </div>
+          <div class="event-desc">
+            Slow morning. Stolen blankets. Stretch, kiss, smile. No rush today 💗
+          </div>
+        </div>
+      </article>
+
+      <!-- DRIVE 21 MINS -->
+      <article class="drive-block">
+        <div class="time-dot">
+          <div class="time-bubble">🚗</div>
+        </div>
+        <div class="drive-card">
+          <div class="car-row">
+            <span>Drive to brunch</span>
+            <span>· ~30 mins</span>
+          </div>
+          <div class="road-bar">
+            <span class="car-emoji">🚗💨</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SUN & MOON -->
+      <article class="event-block">
+        <div class="time-dot">
+          <div class="time-bubble">12:30</div>
+          
+        </div>
+        <div class="event-card">
+          <div class="event-header-row">
+            <div class="event-title">
+              Sun &amp; Moon ✨
+              <span class="tag-pill">brunch date</span>
+            </div>
+          </div>
+          <div class="event-desc">
+            Cozy brunch, golden light, shared bites. “One fork… or two?” 😌
+          </div>
+          <div class="img-row">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjPcLXkyc0BRp4IWODySga2gHc_tFVipilWxZ-jBmEC2TMzacSR3qXcELhu00pxl9ftR5qkGnXCSB6hwKzIp1CK3lGwaF_bqJMFIwK52hV6N6jQFxl6jdN7edk2ZkJCR7WFBRjWmUIYeHy_axEcLKEc0HO11-i3shl-QjcLE8n0T69LJFGa0j6JczPDPqk/s6060/DSC04101.jpg" alt="Sun & Moon interior warm lighting" />
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh91F2VBwW7kFRyY4pHXaszaGCteNLgoIIttFCJpA9zVG1hA_eKME2Y4Q-lFX8OeKXBCSaxgrIqYu-Yo_huUURWV7bh2lZhMzJTPUJmzCIrC2wFG47owzUmhPdSULJod1K-0oxjFAy3o7lfuIGA2fQzIYEc9ayus_h8AgEqyoqtJZHadM08eJrQDldFvD4/s5451/DSC04072.jpg" alt="Brunch plates at Sun & Moon" />
+            <img src="https://www.malaymail.com/malaymail/uploads/images/2025/09/26/301119.jpg" alt="Cafe vibe, Sun & Moon KL" />
+          </div>
+        </div>
+      </article>
+
+      <!-- DRIVE 4 MINS -->
+      <article class="drive-block">
+        <div class="time-dot">
+          <div class="time-bubble">🚗</div>
+        </div>
+        <div class="drive-card">
+          <div class="car-row">
+            <span>To Zen Ceramic</span>
+            <span>· ~25 mins</span>
+          </div>
+          <div class="road-bar">
+            <span class="car-emoji">🚗💨</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ZEN CERAMIC -->
+      <article class="event-block">
+        <div class="time-dot">
+          <div class="time-bubble">3:00</div>
+          
+        </div>
+        <div class="event-card">
+          <div class="event-header-row">
+            <div class="event-title">
+              Zen Ceramic 🏺
+              <span class="tag-pill">pottery time</span>
+            </div>
+          </div>
+          <div class="event-desc">
+            Clay on our hands, memories in the making. We spin little bowls + big feelings 🥹
+          </div>
+          <div class="img-row">
+            <img src="https://zenceramic.asia/wp-content/uploads/2023/11/Wheel-throwing-by-ZC-1-1024x682.jpg" alt="Throwing clay on wheel" />
+            <img src="https://www.zenceramics.com/images/ebruli/b3.jpg" alt="Couple pottery class" />
+            <img src="https://zenceramic.asia/wp-content/uploads/2023/11/Group-Pottery.jpg" alt="Zen Ceramic studio view" />
+          </div>
+        </div>
+      </article>
+
+      <!-- DRIVE 14 MINS -->
+      <article class="drive-block">
+        <div class="time-dot">
+          <div class="time-bubble">🚗</div>
+        </div>
+        <div class="drive-card">
+          <div class="car-row">
+            <span>To Sho Floofeee</span>
+            <span>· ~5 mins</span>
+          </div>
+          <div class="road-bar">
+            <span class="car-emoji">🚗💨</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SHO FLOOFEEE -->
+      <article class="event-block">
+        <div class="time-dot">
+          <div class="time-bubble">5:30</div>
+          
+        </div>
+        <div class="event-card">
+          <div class="event-header-row">
+            <div class="event-title">
+              Sho Floofeee 🐾
+              <span class="tag-pill">floof break</span>
+            </div>
+          </div>
+          <div class="event-desc">
+            Cute drinks, soft paws, shared giggles. We rest, recharge, pat fluffy friends 🐶☁️
+          </div>
+          <div class="img-row">
+            <img src="https://cdn.corner.inc/place-photo/ATKogpcyepIATPWuO-iCnuI5cOVo5nklafPzNMRtzrIWP8BLBiOpHUFlU6sb-Wr5nCP5QsP605TeZlVK8DVOyrK8G31QXmmieAn2sBe_7HDWl6lMCPC1-QPipspgXfEQjCT9IitX2f3v8JDF3CCQzrCPcNH8Vst3UEL9-GMVKjoR4RF03JAHUStJKWyf5NUTHbHjENiG9e-6XlMA03k--bAuWAl8y2JHhXjbR8DXIWJh7bv2qWMljBzoQnboXwDYf5jdFnNbJ5wJ9X_BTSgaaW1Xr5H9WiH9vAEecRXRQCJOgonxBOEuOltxK1xPPLI57_ZZgDKgVAMtID1AcS6PuJe96hVIf0We08RzzL9qsLx9sl9fqiLVjSC6Cd3RHkzuD6kZyX0TE0fis14X3sWxx_nXdcqnbyK8xzsEe3iJc1jU2jpwd76BWVM_etfWm02Fzeh9nom1bo959tRSnSX9y-hbQbtUJ-VIJTaj78ghyXEFrPHbN5Oirzh6FOls0mmZXdPIH3MFxODpLPu56hFbslKe720rkkNNNqSGxy9_K-FZcCc3LxNhXo9TtA6Wwzl6u0qIBlWxjyRkqre2wm5RFIShrMQfI4iuQ9JT5NlNaC_q20dAaF9xDkpVrrEMBOQLO0yk.jpeg" alt="Sho Floofeee interior" />
+            <img src="https://cdn.corner.inc/place-photo/ATKogpf_qmExxt1Ck6T75N4d83xrlKo8tbWTl3QWy2LPUIGSqgi30WwNB6L8NfWWG1emWNZSymtNq2gS0BTMapnOiN44I0lgVZItmS02GpTAqPUwSRFcxj0ZOXmhHi9Qq5ECPji7EouCOCLNdnY1Mpgp6u4MZMM8wYjzpR1zkuKkBvcvth_XeOlMyTujwmc8dxq52ME5-E7CY70QTgkBA1AG7erVaKi2FChWbryWnN_MXM6LlA1XMEt43P0jlpo7Vhyu0t-Cre9CtjNvgklI3yv8vUjBscw3vl8jxqk5kfHKbCLEha5UdHhB5Qhj_MCVLvO_QIj9w5n6ljCoktO2QqQuewLzVhxH9FSil6pzm8Ljanr5KjxB-eJOcQJK_yKdYVSiHWb4r9t0qkC17_e5P2x303Ag6dFPb8zjxowLOE1JO66mdAcy9W8dPV1gLlJ16kmfkqt50CFApDmHij6EJQiqxuTFB5XqUUs6v--t1Wo83-z79dYZLZK_KVEEhHLMAFT7pY_nlczhcLmYRLD7e5UOdtz8biIXZBy5ysmTJAizg4rgkx0y7r0Zvs5PHsUQlT1gtDezdc5Xt2XjD9hF-s14dr-nl9eTav77Pl1Ph-efoi_q1xhAEBtvnKxMXucKf1zU-5v68h5tJRdjfA5Y1n-arPAGX2c.jpeg" alt="Sho Floofeee drinks and vibe" />
+            <img src="https://cdn.corner.inc/place-photo/ATKogpfaH_xFLtdmpCgt8sXoajylJbziO2K0s6BYzgAo-tfXJOFQiVjTVYxUJucWk20mSRapTvVwV-RZe2HXTm_wBFwZvF7XPvJN3OWVz7bKXFAMEbuBjGiFPLE4e6VzhRtJCrnxAC79Fe9C9G7TfdEsY7TF2kk9b3yEYXk-CF7AAxgzDnAxrXDJW9pwMhAMIVqwB0lIv1WTynaVgAgsgXmoYXMYvDHQMpSCoMO2fx0H08EbZiv1MKEmtAaXnQsh2fJ9owSRrXK9-Gic_8yyHNt2b8ZFIhrDONp46VEUjk4lAE2nC_P9CpfqsaP0LI0OLgRNKoi5kabhz0cBcxvM0EBAIOLIs6ge8iJDITnQoFfAf_wF27joUU86M2ZlCvtTkvV2PRPCZe2yX78WzO8dLDWfa0nMuirQ_g5GOanm2YIEl5tsFGCcWAUoimjwWvxgFaKJuDCJwVTv070OV7W6tQ4kZ2_YOTKPvVeTcjcYQOTsKVMzctvcnEGSVs74gFw3TSG0exGk3V9MhruYNTZvPFaJI_HgR3-Ux1tiSkCVaVoRCg3SmRMr2vpVTC5YGGSSIJNALWCbpUVJX-usSh31diW-qVxD-Xhe1vOkDIL2fb9sLK3CqAvxl2UHHfsJ7iblY667pTEscWky.jpeg" alt="Sho Floofeee floofy friends" />
+          </div>
+        </div>
+      </article>
+
+      <!-- DRIVE to DINNER -->
+      <article class="drive-block">
+        <div class="time-dot">
+          <div class="time-bubble">🚗</div>
+        </div>
+        <div class="drive-card">
+          <div class="car-row">
+            <span>Dinner timeeee 🍝</span>
+            <span>· ~15 mins</span>
+          </div>
+          <div class="road-bar">
+            <span class="car-emoji">🚗💨</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- BACIO ITALIAN -->
+      <article class="event-block">
+        <div class="time-dot">
+          <div class="time-bubble">7:30</div>
+          
+        </div>
+        <div class="event-card">
+          <div class="event-header-row">
+            <div class="event-title">
+              Bacio Italian 🍝🥂
+              <span class="tag-pill">dinner romance</span>
+            </div>
+          </div>
+          <div class="event-desc">
+            Pasta, clinking glasses, soft lighting. Ending the night wrapped in Italian warmth 💕
+          </div>
+          <div class="img-row">
+            <img src="https://images.eatdrinkkl.com/store/postimage/65413/image/webp_version-f03b0b7b16e931797996dc6262be81ae.webp" alt="Bacio Italian pasta plate" />
+            <img src="https://images.eatdrinkkl.com/store/postimage/65421/image/webp_version-b3864f0dc8b4cfe0505aff3b7db49fa7.webp" alt="Bacio Italian interior candlelight" />
+            <img src="https://i0.wp.com/erisgoesto.com/wp-content/uploads/2023/02/20230225_181959-1.jpg?fit=1200%2C900&ssl=1" alt="Cozy Italian dinner vibes" />
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-card">
+      <div class="footer-big">The end (for today) 💞</div>
+      <div class="footer-note">
+        I love doing life with you.  
+        Next adventure loading... ✨
+      </div>
+    </footer>
+
+  </main>
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+  <span class="close-btn">&times;</span>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  <div class="caption" id="caption"></div>
+</div>
+<script>
+  // Select the modal and image
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const caption = document.getElementById("caption");
+  const closeBtn = document.querySelector(".close-btn");
+
+  // Make all timeline images clickable
+  document.querySelectorAll(".img-row img").forEach(img => {
+    img.addEventListener("click", () => {
+      lightbox.style.display = "block";
+      lightboxImg.src = img.src;
+      caption.textContent = img.alt;
+    });
+  });
+
+  // Close when clicking ✕ or outside
+  closeBtn.addEventListener("click", () => {
+    lightbox.style.display = "none";
+  });
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      lightbox.style.display = "none";
+    }
+  });
+</script>
+
+</body>
+</html>
