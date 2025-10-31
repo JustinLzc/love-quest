@@ -291,10 +291,13 @@
     overflow: auto;
     background-color: rgba(0,0,0,0.8);
     backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     }
 
     .lightbox-img {
-    margin: auto;
+    margin: 0;
     display: block;
     max-width: 85%;
     max-height: 80vh;
@@ -572,7 +575,7 @@
   // Make all timeline images clickable
   document.querySelectorAll(".img-row img").forEach(img => {
     img.addEventListener("click", () => {
-      lightbox.style.display = "block";
+      lightbox.style.display = "flex";
       lightboxImg.src = img.src;
       caption.textContent = img.alt;
     });
@@ -591,6 +594,7 @@
 
 </body>
 </html>
+
 
 
 
